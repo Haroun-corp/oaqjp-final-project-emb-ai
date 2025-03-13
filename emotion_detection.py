@@ -1,4 +1,5 @@
 import requests
+import json
 
 def emotion_detector(text_to_analyze):
     # URL of the emotion detection service
@@ -9,7 +10,13 @@ def emotion_detector(text_to_analyze):
     myobj = { "raw_document": { "text": text_to_analyze } }
     # Sending a POST request to the emotion detection API
     response = requests.post(url, json=myobj, headers=header)
+    # Parsing the JSON response from the API
+    formatted_response = json.loads(response.text)
 
-    # Returning emotion detection results
-    return response.text
+    emotion = formatted_response['emotionPredictions'][0]['emotion']
+    dominant = max(emotion, key=emotion.get)
+    emotion['dominant_emotion'] = dominant
+
     
+    # Returning a dictionary containing emotion detection results
+    return emotion
