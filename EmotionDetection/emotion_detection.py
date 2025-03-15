@@ -19,5 +19,5 @@ def emotion_detector(text_to_analyze):
 
     
     # Returning a dictionary containing emotion detection results
-    return {'dominant_emotion': emotion['dominant_emotion']}
+    return emotion
    
