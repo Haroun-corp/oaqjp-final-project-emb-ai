@@ -27,12 +27,15 @@ def sent_analyzer():
     sadness_score = response['sadness']
     dominant_emotion = response['dominant_emotion']
 
-    # Check if the emotion scores is None and dominant emotion , indicating an error or invalid input
-    if anger_score is None and disgust_score is None and fear_score is None and joy_score is None and sadness_score is None and dominant_emotion is None:
+    # Check if the dominant emotion is None, indicating an error or invalid input
+    if dominant_emotion is None:
         return "Invalid text! Please try again!"
 
-    # Return a formatted string with the emotions, scores and dominant_emotion 
-    return f"For the given statement, the system response is 'anger': {anger_score}, 'disgust': {disgust_score}, 'fear': {fear_score}, 'joy': {joy_score}, and 'sadness': {sadness_score}. The dominant emotion is {dominant_emotion}."
+    # Return a formatted string with the emotions, scores and dominant_emotion
+    output_1 = f"For the given statement, the system response is 'anger': {anger_score}"
+    output_2 = f", 'disgust': {disgust_score}, 'fear': {fear_score}, 'joy': {joy_score}"
+    output_3 = f", and 'sadness': {sadness_score}. The dominant emotion is {dominant_emotion}."
+    return output_1 + output_2 + output_3
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
